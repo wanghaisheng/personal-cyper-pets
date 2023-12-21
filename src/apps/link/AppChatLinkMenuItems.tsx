@@ -2,6 +2,7 @@ import * as React from 'react';
 import { shallow } from 'zustand/shallow';
 
 import { MenuItem, Select, Switch, Typography } from '@mui/joy';
+import locales from '~/locales/en.json';
 import { useUIPreferencesStore } from '~/common/state/store-ui';
 
 import { useChatShowSystemMessages } from '../chat/store-app-chat';
@@ -36,7 +37,7 @@ export function AppChatLinkMenuItems() {
 
     <MenuItem onClick={() => setShowSystemMessages(!showSystemMessages)} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        System message
+        {locales.system_message}
       </Typography>
       <Switch
         checked={showSystemMessages} onChange={handleRenderSystemMessageChange}
@@ -47,7 +48,7 @@ export function AppChatLinkMenuItems() {
 
     <MenuItem onClick={() => setRenderMarkdown(!renderMarkdown)} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        Markdown
+        {locales.markdown}
       </Typography>
       <Switch
         checked={renderMarkdown} onChange={handleRenderMarkdownChange}
@@ -58,7 +59,7 @@ export function AppChatLinkMenuItems() {
 
     <MenuItem onClick={() => setZenMode(zenOn ? 'clean' : 'cleaner')} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        Zen
+        {locales.zen}
       </Typography>
       <Switch
         checked={zenOn} onChange={handleZenModeChange}
@@ -69,7 +70,7 @@ export function AppChatLinkMenuItems() {
 
     <MenuItem sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        Language
+        {locales.language}
       </Typography>
       <Select value={preferredLanguage} onChange={(event) => setPreferredLanguage(event.target.value)}>
         <MenuItem value="en">English</MenuItem>
