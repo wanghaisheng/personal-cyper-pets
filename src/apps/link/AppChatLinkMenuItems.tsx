@@ -35,7 +35,7 @@ export function AppChatLinkMenuItems() {
 
   return <>
 
-    <MenuItem onClick={(event) => {
+    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
   if (!event) return;
   setShowSystemMessages(!showSystemMessages);
 }} sx={{ justifyContent: 'space-between' }}>
@@ -49,7 +49,7 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event) => {
+    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
   if (!event) return;
   setRenderMarkdown(!renderMarkdown);
 }} sx={{ justifyContent: 'space-between' }}>
@@ -63,7 +63,7 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event) => {
+    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
   if (!event) return;
   setZenMode(zenOn ? 'clean' : 'cleaner');
 }} sx={{ justifyContent: 'space-between' }}>
@@ -81,9 +81,9 @@ export function AppChatLinkMenuItems() {
       <Typography>
         {locales.language}
       </Typography>
-      <Select value={selectedLanguage} onChange={(event) => {
+      <Select value={selectedLanguage} onChange={(event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     if (!event) return;
-    setSelectedLanguage(event.target.value);
+    setSelectedLanguage(event.target.value as string);
   }}>
         <MenuItem value="en">English</MenuItem>
         <MenuItem value="es">Español</MenuItem>
