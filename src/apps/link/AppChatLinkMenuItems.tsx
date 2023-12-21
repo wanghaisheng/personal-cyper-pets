@@ -35,7 +35,10 @@ export function AppChatLinkMenuItems() {
 
   return <>
 
-    <MenuItem onClick={() => setShowSystemMessages(!showSystemMessages)} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+  if (!event) return;
+  setShowSystemMessages(!showSystemMessages);
+}} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.system_message}
       </Typography>
@@ -46,7 +49,10 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={() => setRenderMarkdown(!renderMarkdown)} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+  if (!event) return;
+  setRenderMarkdown(!renderMarkdown);
+}} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.markdown}
       </Typography>
@@ -57,7 +63,10 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={() => setZenMode(zenOn ? 'clean' : 'cleaner')} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+  if (!event) return;
+  setZenMode(zenOn ? 'clean' : 'cleaner');
+}} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.zen}
       </Typography>
