@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Box, ListDivider, ListItemDecorator, MenuItem, Switch } from '@mui/joy';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
@@ -13,10 +14,26 @@ import type { DConversationId } from '~/common/state/store-chats';
 import { KeyStroke } from '~/common/components/KeyStroke';
 import { closeLayoutMenu } from '~/common/layout/store-applayout';
 import { useUICounter } from '~/common/state/store-ui';
+import { getDictionary, getLocales } from '../../../../i18n/langHelper';
 
 import { useChatShowSystemMessages } from '../../store-app-chat';
 
+const languages = [
+  {
+    code: 'en',
+    name: 'English',
+  },
+  {
+    code: 'es',
+    name: 'Spanish',
+  },
+  {
+    code: 'fr',
+    name: 'French',
+  },
+];
 
+// const languages=getLocales()
 export function ChatMenuItems(props: {
   conversationId: DConversationId | null,
   hasConversations: boolean,
@@ -29,13 +46,14 @@ export function ChatMenuItems(props: {
   onConversationFlatten: (conversationId: DConversationId) => void,
 }) {
 
+  const { t, i18n } = useTranslation();
+
   // external state
   const { touch: shareTouch } = useUICounter('export-share');
   const [showSystemMessages, setShowSystemMessages] = useChatShowSystemMessages();
 
   // derived state
   const disabled = !props.conversationId || props.isConversationEmpty;
-
 
   const closeMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -70,48 +88,49 @@ export function ChatMenuItems(props: {
 
   const handleToggleSystemMessages = () => setShowSystemMessages(!showSystemMessages);
 
+  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLanguage = event.target.value;
+    i18n.changeLanguage(newLanguage);
+  };
 
   return <>
-
     {/*<ListItem>*/}
     {/*  <Typography level='body-sm'>*/}
     {/*    Conversation*/}
     {/*  </Typography>*/}
     {/*</ListItem>*/}
+    <MenuItem>
+      <ListItemDecorator><SettingsSuggestIcon /></ListItemDecorator>
+      {t('Conversation')}
+    </MenuItem>
 
     <MenuItem onClick={handleToggleSystemMessages}>
       <ListItemDecorator><SettingsSuggestIcon /></ListItemDecorator>
-      System message
-      <Switch checked={showSystemMessages} onChange={handleToggleSystemMessages} sx={{ ml: 'auto' }} />
+      {t('System message')}
+      <Switch checked={showSystemMessages} onChange={handleToggleSystemMessages} sx='auto' />
     </MenuItem>
 
     <ListDivider inset='startContent' />
 
     <MenuItem disabled={disabled} onClick={handleConversationBranch}>
       <ListItemDecorator><ForkRightIcon /></ListItemDecorator>
-      Branch
+      {t('Branch')}
     </MenuItem>
 
     <MenuItem disabled={disabled} onClick={handleConversationFlatten}>
       <ListItemDecorator><CompressIcon color='success' /></ListItemDecorator>
-      Flatten
+      {t('Flatten')}
     </MenuItem>
 
     <ListDivider inset='startContent' />
-
-    <MenuItem disabled={disabled} onClick={handleToggleMessageSelectionMode}>
-      <ListItemDecorator>{props.isMessageSelectionMode ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />}</ListItemDecorator>
-      <span style={props.isMessageSelectionMode ? { fontWeight: 800 } : {}}>
-        Cleanup ...
-      </span>
-    </MenuItem>
 
     <MenuItem disabled={!props.hasConversations} onClick={handleConversationExport}>
       <ListItemDecorator>
         <FileDownloadIcon />
       </ListItemDecorator>
-      Share / Export ...
+      {t('Share / Export ...')}
     </MenuItem>
+
 
     <MenuItem disabled={disabled} onClick={handleConversationClear}>
       <ListItemDecorator><ClearIcon /></ListItemDecorator>
@@ -121,5 +140,19 @@ export function ChatMenuItems(props: {
       </Box>
     </MenuItem>
 
-  </>;
+    <ListDivider inset='startContent' />
+
+    <MenuItem>
+      <ListItemDecorator><SettingsSuggestIcon /></ListItemDecorator>
+      {t('Language')}
+      <select onChange={handleLanguageChange} value={i18n.language}>
+        {languages.map((language) => (
+          <option key={language.code} value={language.code}>
+            {language.name}
+          </option>
+        ))}
+      </select>
+    </MenuItem>
+    </>;
+
 }
