@@ -10,13 +10,13 @@ import type { DConversationId } from '~/common/state/store-chats';
 import { isBrowser } from './util/pwaUtils';
 
 
-export const ROUTE_INDEX = '/';
+export const ROUTE_INDEX = '/:lang';
 export const ROUTE_INDEX_LANG = '/?lang=:lang';
-export const ROUTE_APP_CHAT = '/';
+export const ROUTE_APP_CHAT = '/:lang';
 export const ROUTE_APP_CHAT_LANG = '/?lang=:lang';
-export const ROUTE_APP_LINK_CHAT = '/link/chat/:linkId';
+export const ROUTE_APP_LINK_CHAT = '/link/chat/:linkId/:lang';
 export const ROUTE_APP_LINK_CHAT_LANG = '/link/chat/:linkId?lang=:lang';
-export const ROUTE_APP_NEWS = '/news';
+export const ROUTE_APP_NEWS = '/news/:lang';
 export const ROUTE_APP_NEWS_LANG = '/news?lang=:lang';
 const ROUTE_CALLBACK_OPENROUTER = '/link/callback_openrouter';
 
