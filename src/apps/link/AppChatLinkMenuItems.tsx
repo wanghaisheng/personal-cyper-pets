@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'zustand/shallow';
 
 import { MenuItem, Select, Switch, Typography } from '@mui/joy';
-import locales from '~/locales/en.json';
+import locales from '../../locales/en.json';
 import { useUIPreferencesStore } from '~/common/state/store-ui';
 
 import { useChatShowSystemMessages } from '../chat/store-app-chat';
