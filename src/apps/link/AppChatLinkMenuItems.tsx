@@ -18,11 +18,11 @@ export function AppChatLinkMenuItems() {
   const {
     renderMarkdown, setRenderMarkdown,
     zenMode, setZenMode,
-    preferredLanguage, setPreferredLanguage,
+    selectedLanguage, setSelectedLanguage,
   } = useUIPreferencesStore(state => ({
     renderMarkdown: state.renderMarkdown, setRenderMarkdown: state.setRenderMarkdown,
     zenMode: state.zenMode, setZenMode: state.setZenMode,
-    preferredLanguage: state.preferredLanguage, setPreferredLanguage: state.setPreferredLanguage,
+    selectedLanguage: state.selectedLanguage, setSelectedLanguage: state.setSelectedLanguage,
   }), shallow);
 
 
@@ -72,7 +72,7 @@ export function AppChatLinkMenuItems() {
       <Typography>
         {locales.language}
       </Typography>
-      <Select value={preferredLanguage} onChange={(event) => setPreferredLanguage(event.target.value)}>
+      <Select value={selectedLanguage} onChange={(event) => setSelectedLanguage(event.target.value)}>
         <MenuItem value="en">English</MenuItem>
         <MenuItem value="es">Español</MenuItem>
         <MenuItem value="fr">Français</MenuItem>
