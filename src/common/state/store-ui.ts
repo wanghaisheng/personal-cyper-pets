@@ -8,8 +8,8 @@ interface UIPreferencesStore {
 
   // UI Features
 
-  preferredLanguage: string;
-  setPreferredLanguage: (preferredLanguage: string) => void;
+  selectedLanguage: string;
+  setSelectedLanguage: (selectedLanguage: string) => void;
 
   centerMode: 'narrow' | 'wide' | 'full';
   setCenterMode: (centerMode: 'narrow' | 'wide' | 'full') => void;
@@ -42,8 +42,8 @@ export const useUIPreferencesStore = create<UIPreferencesStore>()(
 
       // UI Features
 
-      preferredLanguage: (typeof navigator !== 'undefined') && navigator.language || 'en-US',
-      setPreferredLanguage: (preferredLanguage: string) => set({ preferredLanguage }),
+      selectedLanguage: (typeof navigator !== 'undefined') ? navigator.language : 'en-US',
+      setSelectedLanguage: (selectedLanguage: string) => set({ selectedLanguage }),
 
       centerMode: 'wide',
       setCenterMode: (centerMode: 'narrow' | 'wide' | 'full') => set({ centerMode }),

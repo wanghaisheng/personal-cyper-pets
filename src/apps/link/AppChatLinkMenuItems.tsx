@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'zustand/shallow';
 
-import { MenuItem, Switch, Typography } from '@mui/joy';
-
+import { MenuItem, Select, Switch, Typography } from '@mui/joy';
+import locales from '../../locales/en.json';
 import { useUIPreferencesStore } from '~/common/state/store-ui';
 
 import { useChatShowSystemMessages } from '../chat/store-app-chat';
@@ -18,24 +18,28 @@ export function AppChatLinkMenuItems() {
   const {
     renderMarkdown, setRenderMarkdown,
     zenMode, setZenMode,
+    selectedLanguage, setSelectedLanguage,
   } = useUIPreferencesStore(state => ({
     renderMarkdown: state.renderMarkdown, setRenderMarkdown: state.setRenderMarkdown,
     zenMode: state.zenMode, setZenMode: state.setZenMode,
+    selectedLanguage: state.selectedLanguage, setSelectedLanguage: state.setSelectedLanguage,
   }), shallow);
 
 
-  const handleRenderSystemMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => setShowSystemMessages(event.target.checked);
-  const handleRenderMarkdownChange = (event: React.ChangeEvent<HTMLInputElement>) => setRenderMarkdown(event.target.checked);
-  const handleZenModeChange = (event: React.ChangeEvent<HTMLInputElement>) => setZenMode(event.target.checked ? 'cleaner' : 'clean');
+  const handleRenderSystemMessageChange = (event) => setShowSystemMessages(event.target.checked);
+  const handleRenderMarkdownChange = (event) => setRenderMarkdown(event.target.checked);
+  const handleZenModeChange = (event) => setZenMode(event.target.checked ? 'cleaner' : 'clean');
 
   const zenOn = zenMode === 'cleaner';
 
 
   return <>
 
-    <MenuItem onClick={() => setShowSystemMessages(!showSystemMessages)} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={() => {
+      setShowSystemMessages(!showSystemMessages);
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        System message
+        {locales.system_message}
       </Typography>
       <Switch
         checked={showSystemMessages} onChange={handleRenderSystemMessageChange}
@@ -44,9 +48,11 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={() => setRenderMarkdown(!renderMarkdown)} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={() => {
+      setRenderMarkdown(!renderMarkdown);
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        Markdown
+        {locales.markdown}
       </Typography>
       <Switch
         checked={renderMarkdown} onChange={handleRenderMarkdownChange}
@@ -55,15 +61,32 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={() => setZenMode(zenOn ? 'clean' : 'cleaner')} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={() => {
+      setZenMode(zenOn ? 'clean' : 'cleaner');
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
-        Zen
+        {locales.zen}
       </Typography>
       <Switch
         checked={zenOn} onChange={handleZenModeChange}
         // endDecorator={zenOn ? 'On' : 'Off'}
         slotProps={{ endDecorator: { sx: { minWidth: 26 } } }}
       />
+    </MenuItem>
+
+    <MenuItem sx={{ justifyContent: 'space-between' }}>
+      <Typography>
+        {locales.language}
+      </Typography>
+      <Select value={selectedLanguage} onChange={(handleLanguageChange) => {
+        if (!event) return;
+        setSelectedLanguage(event.target.value as string);
+      }}>
+        <MenuItem value="en">English</MenuItem>
+        <MenuItem value="es">Español</MenuItem>
+        <MenuItem value="fr">Français</MenuItem>
+        {/* Add more languages as needed */}
+      </Select>
     </MenuItem>
 
   </>;
