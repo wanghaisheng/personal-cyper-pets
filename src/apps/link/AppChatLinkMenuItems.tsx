@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'zustand/shallow';
 
-import { MenuItem, Switch, Typography } from '@mui/joy';
-
+import { MenuItem, Select, Switch, Typography } from '@mui/joy';
 import { useUIPreferencesStore } from '~/common/state/store-ui';
 
 import { useChatShowSystemMessages } from '../chat/store-app-chat';
@@ -18,9 +17,11 @@ export function AppChatLinkMenuItems() {
   const {
     renderMarkdown, setRenderMarkdown,
     zenMode, setZenMode,
+    preferredLanguage, setPreferredLanguage,
   } = useUIPreferencesStore(state => ({
     renderMarkdown: state.renderMarkdown, setRenderMarkdown: state.setRenderMarkdown,
     zenMode: state.zenMode, setZenMode: state.setZenMode,
+    preferredLanguage: state.preferredLanguage, setPreferredLanguage: state.setPreferredLanguage,
   }), shallow);
 
 
@@ -64,6 +65,18 @@ export function AppChatLinkMenuItems() {
         // endDecorator={zenOn ? 'On' : 'Off'}
         slotProps={{ endDecorator: { sx: { minWidth: 26 } } }}
       />
+    </MenuItem>
+
+    <MenuItem sx={{ justifyContent: 'space-between' }}>
+      <Typography>
+        Language
+      </Typography>
+      <Select value={preferredLanguage} onChange={(event) => setPreferredLanguage(event.target.value)}>
+        <MenuItem value="en">English</MenuItem>
+        <MenuItem value="es">Español</MenuItem>
+        <MenuItem value="fr">Français</MenuItem>
+        {/* Add more languages as needed */}
+      </Select>
     </MenuItem>
 
   </>;
