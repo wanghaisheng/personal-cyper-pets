@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import i18n from 'src/common/i18n';
 import { TRPCError } from '@trpc/server';
 
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc.server';
