@@ -35,8 +35,7 @@ export function AppChatLinkMenuItems() {
 
   return <>
 
-    <MenuItem onClick={(event) => {
-      if (!event) return;
+    <MenuItem onClick={() => {
       setShowSystemMessages(!showSystemMessages);
     }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
@@ -49,8 +48,7 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event) => {
-      if (!event) return;
+    <MenuItem onClick={() => {
       setRenderMarkdown(!renderMarkdown);
     }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
@@ -63,8 +61,7 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event) => {
-      if (!event) return;
+    <MenuItem onClick={() => {
       setZenMode(zenOn ? 'clean' : 'cleaner');
     }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
@@ -81,7 +78,7 @@ export function AppChatLinkMenuItems() {
       <Typography>
         {locales.language}
       </Typography>
-      <Select value={selectedLanguage} onChange={(event) => {
+      <Select value={selectedLanguage} onChange={(handleLanguageChange) => {
         if (!event) return;
         setSelectedLanguage(event.target.value as string);
       }}>
