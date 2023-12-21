@@ -26,19 +26,19 @@ export function AppChatLinkMenuItems() {
   }), shallow);
 
 
-  const handleRenderSystemMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => setShowSystemMessages(event.target.checked);
-  const handleRenderMarkdownChange = (event: React.ChangeEvent<HTMLInputElement>) => setRenderMarkdown(event.target.checked);
-  const handleZenModeChange = (event: React.ChangeEvent<HTMLInputElement>) => setZenMode(event.target.checked ? 'cleaner' : 'clean');
+  const handleRenderSystemMessageChange = (event) => setShowSystemMessages(event.target.checked);
+  const handleRenderMarkdownChange = (event) => setRenderMarkdown(event.target.checked);
+  const handleZenModeChange = (event) => setZenMode(event.target.checked ? 'cleaner' : 'clean');
 
   const zenOn = zenMode === 'cleaner';
 
 
   return <>
 
-    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-  if (!event) return;
-  setShowSystemMessages(!showSystemMessages);
-}} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+      if (!event) return;
+      setShowSystemMessages(!showSystemMessages);
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.system_message}
       </Typography>
@@ -49,10 +49,10 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-  if (!event) return;
-  setRenderMarkdown(!renderMarkdown);
-}} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+      if (!event) return;
+      setRenderMarkdown(!renderMarkdown);
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.markdown}
       </Typography>
@@ -63,10 +63,10 @@ export function AppChatLinkMenuItems() {
       />
     </MenuItem>
 
-    <MenuItem onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-  if (!event) return;
-  setZenMode(zenOn ? 'clean' : 'cleaner');
-}} sx={{ justifyContent: 'space-between' }}>
+    <MenuItem onClick={(event) => {
+      if (!event) return;
+      setZenMode(zenOn ? 'clean' : 'cleaner');
+    }} sx={{ justifyContent: 'space-between' }}>
       <Typography>
         {locales.zen}
       </Typography>
@@ -81,10 +81,10 @@ export function AppChatLinkMenuItems() {
       <Typography>
         {locales.language}
       </Typography>
-      <Select value={selectedLanguage} onChange={(event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    if (!event) return;
-    setSelectedLanguage(event.target.value as string);
-  }}>
+      <Select value={selectedLanguage} onChange={(event) => {
+        if (!event) return;
+        setSelectedLanguage(event.target.value as string);
+      }}>
         <MenuItem value="en">English</MenuItem>
         <MenuItem value="es">Español</MenuItem>
         <MenuItem value="fr">Français</MenuItem>
