@@ -16,6 +16,7 @@ export const settingsCol1Width = 150;
 // Theme & Fonts
 
 const inter = Inter({
+  // Could include language-specific variants if needed here
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
@@ -30,6 +31,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const appTheme = extendTheme({
+  // Could add language-specific color schemes or fonts adjustments here
   fontFamily: {
     body: inter.style.fontFamily,
     code: jetBrainsMono.style.fontFamily,
