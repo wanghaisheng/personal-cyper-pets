@@ -81,7 +81,10 @@ export function AppChatLinkMenuItems() {
       <Typography>
         {locales.language}
       </Typography>
-      <Select value={selectedLanguage} onChange={(event) => setSelectedLanguage(event.target.value)}>
+      <Select value={selectedLanguage} onChange={(event) => {
+    if (!event) return;
+    setSelectedLanguage(event.target.value);
+  }}>
         <MenuItem value="en">English</MenuItem>
         <MenuItem value="es">Español</MenuItem>
         <MenuItem value="fr">Français</MenuItem>
